@@ -1,0 +1,28 @@
+html,body{    	/*para sacar el margen que agrega el navegador-*/
+	margin: 0px;
+	font-family: 'Open Sans', sans-serif; /*Esto es para el fomato de la letra extraida de www.google.com/fonts Se copia
+											el link en el html principal y aqui en el css*/
+}
+a,a:visited{  /*Se utiliza para sacar el remarcado de color y linea cuando un link es utilizado*/
+	color:inherit;
+	text-decoration:none;
+
+}
+#logo{
+	font-size: 1.2em;
+}
+.no-margin{
+	margin: 0px;
+}
+
+.be-blue{		/*Maneja el color de fondo del padding de menu*/
+	/*background-color: rgb(200,50,50);  Se puede utilizar esta o estraer el color en color.adobe.com, agergar #*/
+	background-color: #297ABF;
+}
+.white{
+	/*color: white;  Idem arriba*/
+	color: #F1F2F4;
+}
+.large-padding{  /*Cuadro de navegacion */
+	padding: 10px 7px;
+}

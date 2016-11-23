@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ro</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> 
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<header>
+  		<nav class="be-blue white large-padding">			<!--Creacion de la clase-->
+  			<ul class="no-list row center-xs middle-xs">
+          <li class="col-md">
+            <h1 class="no-margin" id="logo">Aerolinea USACH</h1>
+          </li>
+  				<li class="col-md">
+  					<%= link_to "Inicio", root_path %> 			<!-- este es como hacer un link con html pero usando la libreria de flexboxgrid-->
+  				</li>
+  				<li class="col-md">
+  					Reserva
+  				</li>
+  				<li class="col-md">
+  					Consulta
+  				</li>
+  			
+  			</ul>
+  		</nav>
+
+  	</header>
+
+
+    <%= yield %>
+  </body>
+</html>
