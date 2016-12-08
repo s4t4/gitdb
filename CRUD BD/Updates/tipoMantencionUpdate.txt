@@ -1,0 +1,38 @@
+﻿-- Function: public.updatetipomantencion(integer, integer, character varying, timestamp without time zone, character varying)
+
+-- DROP FUNCTION public.updatetipomantencion(integer, integer, character varying, timestamp without time zone, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatetipomantencion(
+    integer,
+    integer,
+    character varying,
+    timestamp without time zone,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.tipomantencion%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.tipomantencion
+    WHERE 	idtipomantencion = $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.tipomantencion
+        SET 	
+		
+		  idtipomantencionestado= $2,
+		  nombretipomantencion= $3,
+		  fechatipomantencion= $4,
+		  observaciontipomantencion= $5
+		WHERE 	idtipomantencion = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

@@ -1,0 +1,2 @@
+class KindFlight < ApplicationRecord
+end

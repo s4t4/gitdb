@@ -1,0 +1,15 @@
+﻿CREATE OR REPLACE FUNCTION public.insertCliente
+(
+	VARCHAR(64)
+    ,VARCHAR(32)
+    ,TIMESTAMP
+    
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.cliente(nombreCliente,nroPasaporte,fechaIngresoCliente)
+    values ($1,$2,$3);
+END
+$$
+LANGUAGE 'plpgsql';

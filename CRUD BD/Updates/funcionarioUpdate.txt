@@ -1,0 +1,57 @@
+﻿-- Function: public.updatefuncionario(integer, integer, integer, character varying, character varying)
+
+-- DROP FUNCTION public.updatefuncionario(integer, integer, integer, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatefuncionario(
+    integer,
+    integer,
+    integer,
+    character varying,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+
+DECLARE
+
+registro public.funcionario%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.funcionario 
+
+    WHERE idfuncionario = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.funcionario
+
+        SET idfuncionariotipo=$2,
+
+idfuncionarioestado=$3,
+
+                codigofuncionario=$4,
+
+                nombrefuncionario = $5
+
+WHERE idfuncionario = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

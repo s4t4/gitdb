@@ -1,0 +1,35 @@
+﻿CREATE OR REPLACE FUNCTION public.updateVuelo
+(integer,integer,integer,integer,integer,integer,timestamp without time zone,
+  timestamp without time zone,timestamp without time zone,timestamp without time zone)  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.vuelo%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.vuelo
+    WHERE 	idvuelo = $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.vuelo
+        SET 	
+		  idbase= $2,
+		  idtipovuelo= $3,
+		  idmantencion= $4,
+		  idfuncionario= $5,
+		  idvuelodestino= $6,
+		  fechasalidavuelo= $7,
+		  fechallegadavuelo= $8,
+		  salidareal= $9,
+		  llegadareal= $10
+		WHERE 	idvuelo = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE
+COST 100; 
+

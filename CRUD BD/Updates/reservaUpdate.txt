@@ -1,0 +1,40 @@
+﻿-- Function: public.updatereserva(integer, integer, integer, integer, timestamp without time zone, integer)
+
+-- DROP FUNCTION public.updatereserva(integer, integer, integer, integer, timestamp without time zone, integer);
+
+CREATE OR REPLACE FUNCTION public.updatereserva(
+    integer,
+    integer,
+    integer,
+    integer,
+    timestamp without time zone,
+    integer)
+  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.reserva%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.reserva
+    WHERE 	idreserva= $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.reserva
+        SET 	
+		  
+		  idavion= $2,
+		  idcliente= $3,
+		  idvuelo= $4,
+		  fechareserva= $5,
+		  numeroasiento= $6
+		WHERE 	idreserva = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

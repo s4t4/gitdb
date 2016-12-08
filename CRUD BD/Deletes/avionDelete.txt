@@ -1,0 +1,18 @@
+﻿CREATE OR REPLACE FUNCTION public.deleteAvion 
+(
+    _idavion integer
+) RETURNS BOOL AS
+$BODY$
+BEGIN
+	
+    DELETE 	
+    FROM 	public.avion  
+    WHERE 	idavion = _idavion;
+    
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$  
+LANGUAGE 'plpgsql' VOLATILE;

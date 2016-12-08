@@ -1,0 +1,574 @@
+-- Table: public.avion
+
+-- DROP TABLE public.avion;
+
+CREATE TABLE public.avion
+(
+  idavion integer NOT NULL DEFAULT nextval('avion_idavion_seq'::regclass),
+  idavionestado integer,
+  cantidadasientos integer,
+  nombreavion character varying(128),
+  CONSTRAINT pk_avion PRIMARY KEY (idavion),
+  CONSTRAINT fk_avion_relations_avionest FOREIGN KEY (idavionestado)
+      REFERENCES public.avionestado (idavionestado) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.avion
+  OWNER TO s4t4;
+
+-- Index: public.avion_pk
+
+-- DROP INDEX public.avion_pk;
+
+CREATE UNIQUE INDEX avion_pk
+  ON public.avion
+  USING btree
+  (idavion);
+
+-- Index: public.relationship_6_fk
+
+-- DROP INDEX public.relationship_6_fk;
+
+CREATE INDEX relationship_6_fk
+  ON public.avion
+  USING btree
+  (idavionestado);
+
+
+-- Table: public.avionestado
+
+-- DROP TABLE public.avionestado;
+
+CREATE TABLE public.avionestado
+(
+  idavionestado integer NOT NULL DEFAULT nextval('avionestado_idavionestado_seq'::regclass),
+  nombreavionestado character varying(128),
+  fechaingresoavionestado date,
+  netuseravionestado character varying(64),
+  CONSTRAINT pk_avionestado PRIMARY KEY (idavionestado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.avionestado
+  OWNER TO s4t4;
+
+-- Index: public.avionestado_pk
+
+-- DROP INDEX public.avionestado_pk;
+
+CREATE UNIQUE INDEX avionestado_pk
+  ON public.avionestado
+  USING btree
+  (idavionestado);
+
+
+
+-- Table: public.base
+
+-- DROP TABLE public.base;
+
+CREATE TABLE public.base
+(
+  idbase integer NOT NULL DEFAULT nextval('base_idbase_seq'::regclass),
+  idbaseestado integer,
+  nombrebase character varying(64),
+  pais character varying(6),
+  CONSTRAINT pk_base PRIMARY KEY (idbase),
+  CONSTRAINT fk_base_relations_baseesta FOREIGN KEY (idbaseestado)
+      REFERENCES public.baseestado (idbaseestado) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.base
+  OWNER TO s4t4;
+
+-- Index: public.base_pk
+
+-- DROP INDEX public.base_pk;
+
+CREATE UNIQUE INDEX base_pk
+  ON public.base
+  USING btree
+  (idbase);
+
+-- Index: public.relationship_14_fk
+
+-- DROP INDEX public.relationship_14_fk;
+
+CREATE INDEX relationship_14_fk
+  ON public.base
+  USING btree
+  (idbaseestado);
+
+
+
+-- Table: public.baseestado
+
+-- DROP TABLE public.baseestado;
+
+CREATE TABLE public.baseestado
+(
+  idbaseestado integer NOT NULL DEFAULT nextval('baseestado_idbaseestado_seq'::regclass),
+  nombrebaseestado character varying(64),
+  fechaingresobaseestado timestamp without time zone,
+  netuserbaseestado character varying(64),
+  CONSTRAINT pk_baseestado PRIMARY KEY (idbaseestado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.baseestado
+  OWNER TO s4t4;
+
+-- Index: public.baseestado_pk
+
+-- DROP INDEX public.baseestado_pk;
+
+CREATE UNIQUE INDEX baseestado_pk
+  ON public.baseestado
+  USING btree
+  (idbaseestado);
+
+
+-- Table: public.cliente
+
+-- DROP TABLE public.cliente;
+
+CREATE TABLE public.cliente
+(
+  idcliente integer NOT NULL DEFAULT nextval('cliente_idcliente_seq'::regclass),
+  nombrecliente character varying(64),
+  nropasaporte character varying(32),
+  fechaingresocliente timestamp without time zone,
+  CONSTRAINT pk_cliente PRIMARY KEY (idcliente)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.cliente
+  OWNER TO s4t4;
+
+-- Index: public.cliente_pk
+
+-- DROP INDEX public.cliente_pk;
+
+CREATE UNIQUE INDEX cliente_pk
+  ON public.cliente
+  USING btree
+  (idcliente);
+
+
+-- Table: public.funcionario
+
+-- DROP TABLE public.funcionario;
+
+CREATE TABLE public.funcionario
+(
+  idfuncionario integer NOT NULL DEFAULT nextval('funcionario_idfuncionario_seq'::regclass),
+  idfuncionariotipo integer,
+  idfuncionarioestado integer,
+  codigofuncionario character varying(1024),
+  nombrefuncionario character varying(64),
+  CONSTRAINT pk_funcionario PRIMARY KEY (idfuncionario),
+  CONSTRAINT fk_funciona_relations_funciona FOREIGN KEY (idfuncionariotipo)
+      REFERENCES public.funcionariotipo (idfuncionariotipo) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.funcionario
+  OWNER TO s4t4;
+
+-- Index: public.funcionario_pk
+
+-- DROP INDEX public.funcionario_pk;
+
+CREATE UNIQUE INDEX funcionario_pk
+  ON public.funcionario
+  USING btree
+  (idfuncionario);
+
+-- Index: public.relationship_2_fk
+
+-- DROP INDEX public.relationship_2_fk;
+
+CREATE INDEX relationship_2_fk
+  ON public.funcionario
+  USING btree
+  (idfuncionariotipo);
+
+
+-- Table: public.funcionariotipo
+
+-- DROP TABLE public.funcionariotipo;
+
+CREATE TABLE public.funcionariotipo
+(
+  idfuncionariotipo integer NOT NULL DEFAULT nextval('funcionariotipo_idfuncionariotipo_seq'::regclass),
+  nombrefuncionariotipo character varying(64),
+  sdf timestamp without time zone,
+  netuserfuncionariotipo character varying(64),
+  CONSTRAINT pk_funcionariotipo PRIMARY KEY (idfuncionariotipo)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.funcionariotipo
+  OWNER TO s4t4;
+
+-- Index: public.funcionariotipo_pk
+
+-- DROP INDEX public.funcionariotipo_pk;
+
+CREATE UNIQUE INDEX funcionariotipo_pk
+  ON public.funcionariotipo
+  USING btree
+  (idfuncionariotipo);
+
+
+-- Table: public.mantencion
+
+-- DROP TABLE public.mantencion;
+
+CREATE TABLE public.mantencion
+(
+  idmantencion integer NOT NULL DEFAULT nextval('mantencion_idmantencion_seq'::regclass),
+  idtipomantencion integer,
+  idmantencionestado integer,
+  fechamantencion timestamp without time zone,
+  observacionmantencion character varying(1024),
+  CONSTRAINT pk_mantencion PRIMARY KEY (idmantencion),
+  CONSTRAINT fk_mantenci_relations_mantenci FOREIGN KEY (idmantencionestado)
+      REFERENCES public.mantencionestado (idmantencionestado) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_mantenci_relations_tipomant FOREIGN KEY (idtipomantencion)
+      REFERENCES public.tipomantencion (idtipomantencion) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.mantencion
+  OWNER TO s4t4;
+
+-- Index: public.mantencion_pk
+
+-- DROP INDEX public.mantencion_pk;
+
+CREATE UNIQUE INDEX mantencion_pk
+  ON public.mantencion
+  USING btree
+  (idmantencion);
+
+-- Index: public.relationship_11_fk
+
+-- DROP INDEX public.relationship_11_fk;
+
+CREATE INDEX relationship_11_fk
+  ON public.mantencion
+  USING btree
+  (idmantencionestado);
+
+-- Index: public.relationship_9_fk
+
+-- DROP INDEX public.relationship_9_fk;
+
+CREATE INDEX relationship_9_fk
+  ON public.mantencion
+  USING btree
+  (idtipomantencion);
+
+
+
+-- Table: public.mantencionestado
+
+-- DROP TABLE public.mantencionestado;
+
+CREATE TABLE public.mantencionestado
+(
+  idmantencionestado integer NOT NULL DEFAULT nextval('mantencionestado_idmantencionestado_seq'::regclass),
+  nombremantencionestado character varying(128),
+  fechaingresomantencionestado timestamp without time zone,
+  netusermantencionestado character varying(64),
+  CONSTRAINT pk_mantencionestado PRIMARY KEY (idmantencionestado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.mantencionestado
+  OWNER TO s4t4;
+
+-- Index: public.mantencionestado_pk
+
+-- DROP INDEX public.mantencionestado_pk;
+
+CREATE UNIQUE INDEX mantencionestado_pk
+  ON public.mantencionestado
+  USING btree
+  (idmantencionestado);
+
+
+
+
+-- Table: public.reserva
+
+-- DROP TABLE public.reserva;
+
+CREATE TABLE public.reserva
+(
+  idreserva integer NOT NULL DEFAULT nextval('reserva_idreserva_seq'::regclass),
+  idavion integer,
+  idcliente integer,
+  idvuelo integer,
+  fechareserva timestamp without time zone,
+  numeroasiento integer,
+  CONSTRAINT pk_reserva PRIMARY KEY (idreserva),
+  CONSTRAINT fk_reserva_relations_avion FOREIGN KEY (idavion)
+      REFERENCES public.avion (idavion) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_reserva_relations_cliente FOREIGN KEY (idcliente)
+      REFERENCES public.cliente (idcliente) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_reserva_relations_vuelo FOREIGN KEY (idvuelo)
+      REFERENCES public.vuelo (idvuelo) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.reserva
+  OWNER TO s4t4;
+
+-- Index: public.relationship_4_fk
+
+-- DROP INDEX public.relationship_4_fk;
+
+CREATE INDEX relationship_4_fk
+  ON public.reserva
+  USING btree
+  (idvuelo);
+
+-- Index: public.relationship_5_fk
+
+-- DROP INDEX public.relationship_5_fk;
+
+CREATE INDEX relationship_5_fk
+  ON public.reserva
+  USING btree
+  (idavion);
+
+-- Index: public.relationship_7_fk
+
+-- DROP INDEX public.relationship_7_fk;
+
+CREATE INDEX relationship_7_fk
+  ON public.reserva
+  USING btree
+  (idcliente);
+
+-- Index: public.reserva_pk
+
+-- DROP INDEX public.reserva_pk;
+
+CREATE UNIQUE INDEX reserva_pk
+  ON public.reserva
+  USING btree
+  (idreserva);
+
+
+
+
+-- Table: public.tipomantencion
+
+-- DROP TABLE public.tipomantencion;
+
+CREATE TABLE public.tipomantencion
+(
+  idtipomantencion integer NOT NULL DEFAULT nextval('tipomantencion_idtipomantencion_seq'::regclass),
+  idtipomantencionestado integer,
+  nombretipomantencion character varying(128),
+  fechatipomantencion timestamp without time zone,
+  observaciontipomantencion character varying(1024),
+  CONSTRAINT pk_tipomantencion PRIMARY KEY (idtipomantencion),
+  CONSTRAINT fk_tipomant_relations_tipomant FOREIGN KEY (idtipomantencionestado)
+      REFERENCES public.tipomantencionestado (idtipomantencionestado) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tipomantencion
+  OWNER TO s4t4;
+
+-- Index: public.relationship_10_fk
+
+-- DROP INDEX public.relationship_10_fk;
+
+CREATE INDEX relationship_10_fk
+  ON public.tipomantencion
+  USING btree
+  (idtipomantencionestado);
+
+-- Index: public.tipomantencion_pk
+
+-- DROP INDEX public.tipomantencion_pk;
+
+CREATE UNIQUE INDEX tipomantencion_pk
+  ON public.tipomantencion
+  USING btree
+  (idtipomantencion);
+
+
+
+-- Table: public.tipomantencionestado
+
+-- DROP TABLE public.tipomantencionestado;
+
+CREATE TABLE public.tipomantencionestado
+(
+  idtipomantencionestado integer NOT NULL DEFAULT nextval('tipomantencionestado_idtipomantencionestado_seq'::regclass),
+  nombretipomantencionestado character varying(128),
+  fechaingresotipomantencionestad timestamp without time zone,
+  netusertipomantencionestado character varying(64),
+  CONSTRAINT pk_tipomantencionestado PRIMARY KEY (idtipomantencionestado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tipomantencionestado
+  OWNER TO s4t4;
+
+-- Index: public.tipomantencionestado_pk
+
+-- DROP INDEX public.tipomantencionestado_pk;
+
+CREATE UNIQUE INDEX tipomantencionestado_pk
+  ON public.tipomantencionestado
+  USING btree
+  (idtipomantencionestado);
+
+
+
+-- Table: public.tipovuelo
+
+-- DROP TABLE public.tipovuelo;
+
+CREATE TABLE public.tipovuelo
+(
+  idtipovuelo integer NOT NULL DEFAULT nextval('tipovuelo_idtipovuelo_seq'::regclass),
+  nombretipovuelo character varying(64),
+  fechasalidatipovuelo timestamp without time zone,
+  fechallegadatipovuelo timestamp without time zone,
+  CONSTRAINT pk_tipovuelo PRIMARY KEY (idtipovuelo)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tipovuelo
+  OWNER TO s4t4;
+
+-- Index: public.tipovuelo_pk
+
+-- DROP INDEX public.tipovuelo_pk;
+
+CREATE UNIQUE INDEX tipovuelo_pk
+  ON public.tipovuelo
+  USING btree
+  (idtipovuelo);
+
+
+-- Table: public.vuelo
+
+-- DROP TABLE public.vuelo;
+
+CREATE TABLE public.vuelo
+(
+  idvuelo integer NOT NULL DEFAULT nextval('vuelo_idvuelo_seq'::regclass),
+  idbase integer,
+  idtipovuelo integer,
+  idmantencion integer,
+  idfuncionario integer,
+  idvuelodestino integer,
+  fechasalidavuelo timestamp without time zone,
+  fechallegadavuelo timestamp without time zone,
+  salidareal timestamp without time zone,
+  llegadareal timestamp without time zone,
+  CONSTRAINT pk_vuelo PRIMARY KEY (idvuelo),
+  CONSTRAINT fk_vuelo_relations_base FOREIGN KEY (idbase)
+      REFERENCES public.base (idbase) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_vuelo_relations_funciona FOREIGN KEY (idfuncionario)
+      REFERENCES public.funcionario (idfuncionario) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_vuelo_relations_mantenci FOREIGN KEY (idmantencion)
+      REFERENCES public.mantencion (idmantencion) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_vuelo_relations_tipovuel FOREIGN KEY (idtipovuelo)
+      REFERENCES public.tipovuelo (idtipovuelo) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.vuelo
+  OWNER TO s4t4;
+COMMENT ON TABLE public.vuelo
+  IS 'Entidad principal';
+
+-- Index: public.relationship_12_fk
+
+-- DROP INDEX public.relationship_12_fk;
+
+CREATE INDEX relationship_12_fk
+  ON public.vuelo
+  USING btree
+  (idtipovuelo);
+
+-- Index: public.relationship_13_fk
+
+-- DROP INDEX public.relationship_13_fk;
+
+CREATE INDEX relationship_13_fk
+  ON public.vuelo
+  USING btree
+  (idbase);
+
+-- Index: public.relationship_15_fk
+
+-- DROP INDEX public.relationship_15_fk;
+
+CREATE INDEX relationship_15_fk
+  ON public.vuelo
+  USING btree
+  (idmantencion);
+
+-- Index: public.relationship_3_fk
+
+-- DROP INDEX public.relationship_3_fk;
+
+CREATE INDEX relationship_3_fk
+  ON public.vuelo
+  USING btree
+  (idfuncionario);
+
+-- Index: public.vuelo_pk
+
+-- DROP INDEX public.vuelo_pk;
+
+CREATE UNIQUE INDEX vuelo_pk
+  ON public.vuelo
+  USING btree
+  (idvuelo);
+
+
+
+
+
+

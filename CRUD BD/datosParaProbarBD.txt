@@ -1,0 +1,64 @@
+buena
+
+Insert
+-------
+
+select public.insertmantencionestado(1,'lko','02/05/2016','fgh');
+select public.inserttipomantencionestado(1,'ertdf','02/05/2016','fse');
+select public.inserttipomantencion(1,1,'hj','02/05/2016','sdfsd');
+select public.insertmantencion(1,1,1,'02/05/2016','pol');
+select public.insertavionestado('asdas','02/05/2016','fgh');
+select public.insertavion(1,1,'asfds');
+select public.insertbaseestado('sdf','02/05/2016','sdf');
+select public.insertbase(1,'sdf','sdf');
+select public.insertcliente('sdf','sdf','02/05/2016');
+select public.insertfuncionariotipo('sdf','02/05/2016','sdf');
+select public.insertfuncionario(1,1,'sdf','sdf');
+select public.inserttipovuelo(1,'sdf','02/05/2016','02/05/2016');
+select public.insertvuelo(1,1,1,1,1,1,'02/05/2016','02/05/2016','02/05/2016','02/05/2016');
+select public.insertreserva(1,1,1,1,'02/05/2016',1);
+
+Update
+-------
+
+select public.updateavion(1,1,1,'bla');
+select public.updateavionestado(1,'asdas','02/05/2016','bla');
+select public.updatebase(1,1,'sdf','bla');
+select public.updatebaseestado(1,'sdf','02/05/2016','bla');
+select public.updatefuncionario(1,1,1,'bla','bla');
+select public.updatefuncionariotipo(1,'bla','02/05/2016','sdf');
+select public.updatecliente(1,'sdf','bla','02/05/2016');
+select public.updatemantencion(1,1,1,'02/05/2016','pol');
+select public.updatemantencionestado(1,'maiden','02/05/2016','fgh')
+select public.updatereserva(1,1,1,1,'03/07/2016',1);
+select public.updatetipomantencion(1,1,'free','02/05/2016','sdfsd');
+select public.updatetipomantencionestado(1,'yeah','02/05/2016','fse');
+select public.updatetipovuelo(1,'scare','02/05/2016','02/05/2016');
+select public.updatevuelo(1,1,1,1,1,1,'02/05/2016','03/05/2016','02/05/2016','03/05/2016');
+
+Delete
+--------
+
+select public.deletereserva(1);
+select public.deleteavion(1);
+select public.deleteavionestado(1);
+select public.deletevuelo(1);
+select public.deletebase(1);
+select public.deletebaseestado(1);
+select public.deletecliente(1);
+select public.deletefuncionario(1);
+select public.deletefuncionarioestado(1);
+select public.deletemantencion(1);
+select public.deletemantencionestado(1);
+select public.deletetipomantencion(1);
+select public.deletetipomantencionestado(1);
+select public.deletetipovuelo(1);
+
+
+
+
+
+
+
+
+Pendiente

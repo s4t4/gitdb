@@ -1,0 +1,2 @@
+class AirplaneState < ApplicationRecord
+end

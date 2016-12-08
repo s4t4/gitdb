@@ -1,0 +1,61 @@
+﻿CREATE OR REPLACE FUNCTION public.updateCliente
+
+(
+	integer,
+
+    VARCHAR(64),
+
+  VARCHAR(64), 
+
+    timestamp
+
+    
+
+)  RETURNS boolean AS
+
+$BODY$
+
+DECLARE
+
+registro public.cliente%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.cliente 
+
+    WHERE idcliente = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.cliente
+
+        SET nombrecliente=$2,
+
+nropasaporte=$3,
+
+                fechaingresocliente=$4
+
+WHERE idcliente = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+
+LANGUAGE 'plpgsql' VOLATILE
+
+COST 100; 

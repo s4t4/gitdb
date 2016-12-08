@@ -1,0 +1,54 @@
+﻿-- Function: public.updatebase(integer, integer, character varying, character varying)
+
+-- DROP FUNCTION public.updatebase(integer, integer, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatebase(
+    integer,
+    integer,
+    character varying,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+
+DECLARE
+
+registro public.base%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.base 
+
+    WHERE idbase = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.base
+
+        SET idbaseestado=$2,
+
+nombrebase=$3,
+
+                pais=$4
+
+WHERE idbase = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

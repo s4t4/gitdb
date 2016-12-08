@@ -1,0 +1,54 @@
+﻿-- Function: public.updatebaseestado(character varying, timestamp without time zone, character varying)
+
+-- DROP FUNCTION public.updatebaseestado(character varying, timestamp without time zone, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatebaseestado(
+    integer,
+    character varying,
+    timestamp without time zone,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+
+DECLARE
+
+registro public.baseestado%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.baseestado 
+
+    WHERE idbaseestado = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.baseestado
+
+        SET nombrebaseestado=$2,
+
+fechaingresobaseestado=$3,
+
+                netuserbaseestado=$4
+
+WHERE idbaseestado = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

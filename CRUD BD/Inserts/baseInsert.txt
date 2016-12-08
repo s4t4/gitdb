@@ -1,0 +1,14 @@
+﻿CREATE OR REPLACE FUNCTION public.insertBase
+(
+	INTEGER
+    ,VARCHAR(64)
+    ,VARCHAR(6)  
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.base(idbaseEstado,nombreBase,pais)
+    values ($1,$2,$3);
+END
+$$
+LANGUAGE 'plpgsql';

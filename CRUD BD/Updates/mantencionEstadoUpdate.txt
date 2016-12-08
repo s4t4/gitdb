@@ -1,0 +1,36 @@
+﻿-- Function: public.updatemantencionestado(integer, character varying, timestamp without time zone, character varying)
+
+-- DROP FUNCTION public.updatemantencionestado(integer, character varying, timestamp without time zone, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatemantencionestado(
+    integer,
+    character varying,
+    timestamp without time zone,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.mantencionestado%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.mantencionestado
+    WHERE 	idmantencionestado= $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.mantencionestado
+        SET 	
+		  
+		  nombremantencionestado= $2,
+		  fechaingresomantencionestado= $3,
+		  netusermantencionestado= $4
+		WHERE 	idmantencionestado = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

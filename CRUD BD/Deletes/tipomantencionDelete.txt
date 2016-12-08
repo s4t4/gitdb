@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE FUNCTION public.deletetipomantencion(_idtipomantencion integer)
+  RETURNS boolean AS
+$BODY$
+BEGIN
+	DELETE 	
+    FROM 	public.tipomantencion 
+    WHERE 	idtipomantencion = _idtipomantencion;
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.deletetipomantencion(integer)
+  OWNER TO s4t4;

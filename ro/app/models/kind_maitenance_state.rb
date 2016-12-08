@@ -1,0 +1,2 @@
+class KindMaitenanceState < ApplicationRecord
+end

@@ -1,0 +1,26 @@
+﻿CREATE OR REPLACE FUNCTION public.updateAvion
+(integer,integer,integer,varchar(128))  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.avion%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.avion 
+    WHERE 	idavion = $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.avion
+        SET 	idavionestado=$2,
+				cantidadasientos=$3,
+                nombreavion=$4
+		WHERE 	idavion = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE
+COST 100; 

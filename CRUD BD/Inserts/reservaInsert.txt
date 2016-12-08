@@ -1,0 +1,33 @@
+﻿CREATE OR REPLACE FUNCTION public.insertReserva
+(
+	_idreserva integer,
+	_idavion integer,
+	_idcliente integer,
+	_idvuelo integer,
+	_fechareserva timestamp without time zone,
+	_numeroasiento integer
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.reserva(
+	idreserva,
+	idavion,
+	idcliente,
+	idvuelo,
+	fechareserva,
+	numeroasiento
+	    )
+    
+    values ( 
+	_idreserva,
+	_idavion,
+	_idcliente,
+	_idvuelo,
+	_fechareserva,
+	_numeroasiento
+    );
+
+END
+$$
+LANGUAGE 'plpgsql';

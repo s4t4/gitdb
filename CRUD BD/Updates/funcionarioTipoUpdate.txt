@@ -1,0 +1,54 @@
+﻿-- Function: public.updatefuncionariotipo(integer, character varying, timestamp without time zone, character varying)
+
+-- DROP FUNCTION public.updatefuncionariotipo(integer, character varying, timestamp without time zone, character varying);
+
+CREATE OR REPLACE FUNCTION public.updatefuncionariotipo(
+    integer,
+    character varying,
+    timestamp without time zone,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+
+DECLARE
+
+registro public.funcionariotipo%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.funcionariotipo
+
+    WHERE idfuncionariotipo = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.funcionariotipo
+
+        SET nombrefuncionariotipo=$2,
+
+sdf=$3,
+
+                netuserfuncionariotipo=$4
+
+WHERE idfuncionariotipo = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

@@ -1,0 +1,30 @@
+﻿CREATE OR REPLACE FUNCTION public.insertMantencion
+(
+	_idmantencion integer,
+	_idtipomantencion integer,
+	_idmantencionestado integer,
+	_fechamantencion timestamp without time zone,
+	_observacionmantencion character varying(1024)
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.mantencion(
+	idmantencion,
+	idtipomantencion,
+	idmantencionestado,
+	fechamantencion,
+	observacionmantencion
+	    )
+    
+    values ( 
+	_idmantencion,
+	_idtipomantencion,
+	_idmantencionestado,
+	_fechamantencion,
+	_observacionmantencion
+    );
+
+END
+$$
+LANGUAGE 'plpgsql';

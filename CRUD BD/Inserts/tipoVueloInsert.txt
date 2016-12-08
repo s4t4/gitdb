@@ -1,0 +1,26 @@
+﻿CREATE OR REPLACE FUNCTION public.inserttipovuelo(
+    _idtipovuelo integer,
+    _nombretipovuelo character varying,
+    _fechasalidatipovuelo timestamp without time zone,
+    _fechallegadatipovuelo timestamp without time zone)
+  RETURNS void AS
+$BODY$
+BEGIN
+    INSERT INTO public.tipovuelo(
+	idtipovuelo,
+	nombretipovuelo,
+        fechasalidatipovuelo,
+	fechallegadatipovuelo
+	    )
+    
+    values ( 
+	_idtipovuelo,
+	_nombretipovuelo,
+        _fechasalidatipovuelo,
+	_fechallegadatipovuelo
+    );
+
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

@@ -1,0 +1,15 @@
+﻿CREATE OR REPLACE FUNCTION public.insertbaseestado(
+    character varying,
+    timestamp without time zone,
+    character varying)
+  RETURNS void AS
+$BODY$
+BEGIN
+    INSERT INTO public.baseestado(nombrebaseestado,fechaingresobaseestado,netuserbaseestado)
+    values ($1,$2,$3);
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.insertbaseestado(character varying, timestamp without time zone, character varying)
+  OWNER TO s4t4;

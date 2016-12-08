@@ -1,0 +1,15 @@
+﻿CREATE OR REPLACE FUNCTION public.insertFuncionarioTipo
+(
+	varchar(64)
+    ,timestamp
+    ,varchar(32)
+    
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.funcionariotipo(nombreFuncionarioTipo,fechaIngresoFuncionarioTipo,netuserfuncionariotipo)
+    values ($1,$2,$3);
+END
+$$
+LANGUAGE 'plpgsql';

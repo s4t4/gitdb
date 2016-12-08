@@ -1,0 +1,17 @@
+﻿
+CREATE OR REPLACE FUNCTION public.insertfuncionario(
+    integer,
+    integer,
+    character varying,
+    character varying)
+  RETURNS void AS
+$BODY$
+BEGIN
+    INSERT INTO public.funcionario(idfuncionario,idfuncionariotipo,codigofuncionario,nombrefuncionario)
+    values ($1,$2,$3,$4);
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.insertfuncionario(integer, integer, character varying, character varying)
+  OWNER TO s4t4;

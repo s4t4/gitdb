@@ -1,0 +1,15 @@
+﻿CREATE OR REPLACE FUNCTION public.insertAvion
+(
+	_idavionestado integer
+	,_cantidadasientos integer
+	,_nombreAvion varchar(128)
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.avion(idavionestado, cantidadasientos,nombreavion)
+    values (_idavionestado,_cantidadasientos,_nombreAvion);
+
+END
+$$
+LANGUAGE 'plpgsql';

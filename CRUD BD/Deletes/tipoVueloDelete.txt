@@ -1,0 +1,19 @@
+﻿-- Function: public.deletetipovuelo(integer)
+
+-- DROP FUNCTION public.deletetipovuelo(integer);
+
+CREATE OR REPLACE FUNCTION public.deletetipovuelo(_idtipovuelo integer)
+  RETURNS boolean AS
+$BODY$
+BEGIN
+	DELETE 	
+    FROM 	public.tipovuelo
+    WHERE 	idtipovuelo = _idtipovuelo;
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

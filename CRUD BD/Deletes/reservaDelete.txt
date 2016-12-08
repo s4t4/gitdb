@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE FUNCTION public.deletereserva(_idreserva integer)
+  RETURNS boolean AS
+$BODY$
+BEGIN
+	DELETE 	
+    FROM 	public.reserva
+    WHERE 	idreserva = _idreserva;
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.deletereserva(integer)
+  OWNER TO s4t4;

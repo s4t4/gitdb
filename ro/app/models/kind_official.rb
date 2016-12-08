@@ -1,0 +1,2 @@
+class KindOfficial < ApplicationRecord
+end

@@ -1,0 +1,25 @@
+﻿-- View: public.viewvuelosestados
+
+-- DROP VIEW public.viewvuelosestados;
+
+CREATE OR REPLACE VIEW public.viewvuelosestados AS 
+ SELECT a.idfuncionariotipo,
+    a.nombrefuncionariotipo,
+    b.nombrefuncionario,
+    b.codigofuncionario,
+    c.fechasalidavuelo,
+    c.fechallegadavuelo,
+    c.salidareal,
+    c.llegadareal,
+    d.fechamantencion,
+    d.observacionmantencion,
+    e.nombretipomantencion,
+    e.observaciontipomantencion
+   FROM funcionariotipo a
+     JOIN funcionario b ON a.idfuncionariotipo = b.idfuncionariotipo
+     JOIN vuelo c ON b.idfuncionario::text = c.idfuncionario::text
+     LEFT JOIN mantencion d ON c.idmantencion = d.idmantencion
+     LEFT JOIN tipomantencion e ON d.idtipomantencion = e.idtipomantencion;
+
+ALTER TABLE public.viewvuelosestados
+  OWNER TO s4t4;

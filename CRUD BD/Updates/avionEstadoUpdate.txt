@@ -1,0 +1,54 @@
+﻿-- Function: public.updateavionestado(character varying, date, character varying)
+
+-- DROP FUNCTION public.updateavionestado(character varying, date, character varying);
+
+CREATE OR REPLACE FUNCTION public.updateavionestado(
+    integer,	
+    character varying,
+    date,
+    character varying)
+  RETURNS boolean AS
+$BODY$
+
+DECLARE
+
+registro public.avionestado%ROWTYPE;
+
+BEGIN
+
+
+SELECT * 
+
+    INTO registro 
+
+    FROM public.avionestado 
+
+    WHERE idavionestado = $1;
+
+    
+
+IF FOUND THEN
+
+UPDATE public.avionestado
+
+        SET nombreavionestado=$2,
+
+fechaingresoavionestado=$3,
+
+                netuseravionestado=$4
+
+WHERE idavionestado = $1;
+
+        
+
+RETURN TRUE;
+
+END IF;
+
+RETURN FALSE;
+
+END;
+
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

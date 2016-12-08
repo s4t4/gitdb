@@ -1,0 +1,36 @@
+﻿-- Function: public.updatetipovuelo(integer, character varying, timestamp without time zone, timestamp without time zone)
+
+-- DROP FUNCTION public.updatetipovuelo(integer, character varying, timestamp without time zone, timestamp without time zone);
+
+CREATE OR REPLACE FUNCTION public.updatetipovuelo(
+    integer,
+    character varying,
+    timestamp without time zone,
+    timestamp without time zone)
+  RETURNS boolean AS
+$BODY$
+DECLARE
+	registro public.tipovuelo%ROWTYPE;
+BEGIN
+
+	SELECT 	* 
+    INTO 	registro 
+    FROM 	public.tipovuelo
+    WHERE 	idtipovuelo = $1;
+    
+	IF FOUND THEN
+		UPDATE 	public.tipovuelo
+        SET 	
+		 
+		  nombretipovuelo= $2,
+		  fechasalidatipovuelo= $3,
+		  fechallegadatipovuelo = $4
+		WHERE 	idtipovuelo = $1;
+        
+		RETURN 	TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

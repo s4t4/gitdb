@@ -1,0 +1,27 @@
+﻿CREATE OR REPLACE FUNCTION public.insertTipoMantencionEstado
+(
+	_idtipomantencionestado integer,
+	_nombretipomantencionestado character varying(128),
+	_fechaingresotipomantencionestad timestamp without time zone,
+	_netusertipomantencionestado character varying(64)
+)
+RETURNS VOID AS
+$$
+BEGIN
+    INSERT INTO public.tipomantencionestado(
+	idtipomantencionestado,
+	nombretipomantencionestado,
+	fechaingresotipomantencionestad,
+	netusertipomantencionestado
+	    )
+    
+    values ( 
+	_idtipomantencionestado,
+	_nombretipomantencionestado,
+	_fechaingresotipomantencionestad,
+	_netusertipomantencionestado
+    );
+
+END
+$$
+LANGUAGE 'plpgsql';

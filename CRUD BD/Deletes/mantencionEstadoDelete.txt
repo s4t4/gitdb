@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE FUNCTION public.deleteMantencionEstado(_idmantencionestado integer)
+  RETURNS boolean AS
+$BODY$
+BEGIN
+	DELETE 	
+    FROM 	public.mantencionestado
+    WHERE 	idmantencionestado= _idmantencionestado;
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.deleteMantencionEstado(integer)
+  OWNER TO s4t4;

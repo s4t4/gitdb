@@ -1,0 +1,18 @@
+﻿CREATE OR REPLACE FUNCTION public.deleteFuncionarioEstado
+(
+    integer
+) RETURNS BOOL AS
+$BODY$
+BEGIN
+	
+    DELETE 	
+    FROM 	public.funcionariotipo 
+    WHERE 	idfuncionariotipo = $1;
+    
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$  
+LANGUAGE 'plpgsql' VOLATILE;

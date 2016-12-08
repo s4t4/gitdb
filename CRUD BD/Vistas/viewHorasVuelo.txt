@@ -1,0 +1,13 @@
+﻿CREATE OR REPLACE VIEW public.viewhorasvuelo AS 
+ SELECT a.idfuncionariotipo,
+    a.nombrefuncionariotipo,
+    b.nombrefuncionario,
+    b.codigofuncionario,
+    sum(c.salidareal - c.llegadareal) AS horasvuelo
+   FROM funcionariotipo a
+     JOIN funcionario b ON a.idfuncionariotipo = b.idfuncionariotipo
+     JOIN vuelo c ON b.idfuncionario::text = c.idfuncionario::text
+  GROUP BY a.idfuncionariotipo, a.nombrefuncionariotipo, b.nombrefuncionario, b.codigofuncionario;
+
+ALTER TABLE public.viewhorasvuelo
+  OWNER TO s4t4;

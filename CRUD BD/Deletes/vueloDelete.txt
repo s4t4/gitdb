@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE FUNCTION public.deletevuelo(_idvuelo integer)
+  RETURNS boolean AS
+$BODY$
+BEGIN
+	DELETE 	
+    FROM 	public.tipovuelo  
+    WHERE 	idvuelo = _idvuelo;
+	IF FOUND THEN
+		RETURN TRUE;
+	END IF;
+		RETURN FALSE;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION public.deletevuelo(integer)
+  OWNER TO s4t4;

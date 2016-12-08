@@ -1,0 +1,44 @@
+﻿CREATE OR REPLACE FUNCTION public.insertvuelo(
+    _idvuelo integer,
+    _idbase integer,
+    _idtipovuelo integer,
+    _idmantencion integer,
+    _idfuncionario integer,
+    _idvuelodestino integer,
+    _fechasalidavuelo timestamp without time zone,
+    _fechallegadavuelo timestamp without time zone,
+    _salidareal timestamp without time zone,
+    _llegadareal timestamp without time zone)
+  RETURNS void AS
+$BODY$
+BEGIN
+    INSERT INTO public.vuelo(
+	idvuelo,
+	idbase,
+	idtipovuelo,
+	idmantencion,
+	idfuncionario,
+	idvuelodestino,
+	fechasalidavuelo,
+	fechallegadavuelo,
+	salidareal,
+	llegadareal
+	    )
+    
+    values ( 
+	_idvuelo,
+	_idbase,
+	_idtipovuelo,
+	_idmantencion,
+	_idfuncionario,
+	_idvuelodestino,
+	_fechasalidavuelo,
+	_fechallegadavuelo,
+	_salidareal,
+	_llegadareal
+    );
+
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
